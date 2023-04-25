@@ -1,0 +1,28 @@
+@import '~/global.module.scss';
+
+html, body {
+    padding: 0;
+    margin: 0;
+    font-family: Roboto, Arial, Helvetica, sans-serif;   
+    background-color: $pagebgColor;
+    /*overflow-x: hidden;*/
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+main {
+    background-color: $pagebgColor;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(90%, 800px);
+    color: $textColor;
+}
+h1 {
+    font-size: 1.3em;
+}

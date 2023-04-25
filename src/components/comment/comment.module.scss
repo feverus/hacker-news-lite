@@ -1,0 +1,73 @@
+@import '~/global.module.scss';
+
+button {
+    margin: 0;
+}
+
+.vertical_line {
+    z-index: 0;
+    content: "";
+    position: absolute;
+    border-left: 2px solid #30501c;
+    left: -20px;
+    top: -12px;
+    height: calc(100% + 22px);
+    width: 20px;
+}
+
+.comment {
+    @extend .item;
+    width: calc(100% - 40px);
+    z-index: 1;
+    text-align: left;
+    position: relative;
+    margin-left: 40px;
+    box-shadow: 1px 1px 0px 0px $acsentColor;
+    display: flex;
+    flex-direction: column; 
+    opacity: 0;
+    animation: showComment 0.3s forwards;  
+    &.delay {
+        animation-delay: 0.3s;
+    } 
+    &.haveKids {
+        box-shadow: 3px 3px 0px 0px $acsentColor,
+        6px 6px 0px 0px $pagebgColor,
+        9px 9px 0px 0px $acsentColor;
+    }
+    h2 {
+        font-size: 1.1em;
+    }
+    &:before {
+        @extend .vertical_line;
+    }
+    .comment_text {
+        box-shadow: 0px 1px 0px 0px #00000012;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        * {
+            padding: 0;
+            margin: 0;
+            font-size: medium;
+        }
+    }
+    .comment_date {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+.comment_block {
+    position: relative;
+    margin-left: 40px;
+    width: calc(100% - 40px);
+    &:before {
+        @extend .vertical_line;
+        left: -19px;
+    }
+}
+
+@keyframes showComment {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}

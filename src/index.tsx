@@ -1,13 +1,28 @@
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom/client'
 import { Provider } from 'mobx-react'
-import Main from './components/main';
-import defaultStore from './store/defaultStore'
+import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 
-import  './index.module.scss'
+import {Index, loaderIndex} from '~/routes'
+import NewStorie, {loaderNewStorie} from '~/routes/$newStorieId'
+
+import {setStore} from './store/setStore'
 
 const stores = {
-  defaultStore,
+  setStore,
 }
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Index />,
+    loader: loaderIndex,
+  },
+  {
+    path: ":newStorieId",
+    element: <NewStorie />,
+    loader: loaderNewStorie,
+  }
+]);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,6 +30,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <Provider {...stores}>
-    <Main />
+      <RouterProvider router={router} />
   </Provider>
 )

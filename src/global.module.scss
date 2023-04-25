@@ -1,0 +1,17 @@
+$textColor: #111;
+$lightTextColor: #ababab;
+$pagebgColor: #1e1e1e;
+$itemBgColor: #fffff2;
+$itemBorderColor: #eeeeeea0;
+$acsentColor: #30501c;
+$linkColor: #70a070;
+
+.item {
+    background-color: $itemBgColor;
+    box-shadow: 10px 10px 0px 0px $acsentColor;
+    border-radius: 10px;
+    border: 1px solid $itemBorderColor;
+    margin: 0 0 20px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+}
