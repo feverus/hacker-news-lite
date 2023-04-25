@@ -19,3 +19,8 @@ export function dateStampToDate(dateStamp: number): string {
 	const date = new Date(dateStamp * 1000)
 	return date.getFullYear() + '.' + oo(1+date.getMonth()) + '.' + oo(date.getDate()) + ' | ' + oo(date.getHours()) + ':' + oo(date.getMinutes())
 }
+
+export function sleep(ms:number) {
+	console.log('sleep')
+  return new Promise(resolve => setTimeout(resolve, ms));
+}

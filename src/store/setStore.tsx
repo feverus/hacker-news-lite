@@ -7,11 +7,15 @@ export class SetStore {
     autoRefresh:boolean = true
     forceRefresh:boolean = false
     forceReverce:boolean = false
+    forceUpdateList:boolean = false
+
+    path:string = '/hacker-news-lite'
 
     constructor() {
         makeAutoObservable(this, {
             autoRefresh: observable,
             forceRefresh: observable,
+            forceUpdateList: observable,
             setAutoRefresh: action,
             setForceRefresh: action,
         })        
@@ -25,6 +29,9 @@ export class SetStore {
     }
     setForceReverce(mode: boolean) {
         this.forceReverce = mode
+    }
+    setForceUpdateList(mode: boolean) {
+        this.forceUpdateList = mode
     }
 }
 

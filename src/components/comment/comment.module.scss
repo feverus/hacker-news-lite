@@ -16,6 +16,9 @@ button {
 }
 
 .comment {
+    * {
+        white-space: break-spaces;
+    }
     @extend .item;
     width: calc(100% - 40px);
     z-index: 1;

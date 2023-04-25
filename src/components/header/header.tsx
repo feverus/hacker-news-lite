@@ -1,7 +1,7 @@
-import { setStore } from '~/store/setStore'
 import { ReactSVG } from 'react-svg';
 import { useNavigate } from 'react-router-dom'
 import C from './header.module.scss'
+import { setStore } from '~/store/setStore'
 
 type P = {autoUpdateChekbox: boolean, backButton: boolean}
 
@@ -36,7 +36,7 @@ export function Header(props: P ) {
 			</button>
 
 			{props.autoUpdateChekbox && 
-				<div className={C.box}>
+				<div className={C.box + ' gsapBox'}>
 					<input type="checkbox" id="autoRefresh"
 						checked={setStore.autoRefresh}
 						onChange={() => setStore.setAutoRefresh(!setStore.autoRefresh)}

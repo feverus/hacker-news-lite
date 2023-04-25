@@ -1,7 +1,5 @@
-boilerplate
-настроены:
+# Интерфейс для сайта Hacker News (https://news.ycombinator.com/news)
 
-- typeScript
-- mobX
-- sass
-- ky
+Версия на remix.run:
+
+https://github.com/feverus/hacker-news

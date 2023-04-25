@@ -1,9 +1,9 @@
-import { commentsOfNum, dateStampToDate } from '~/service/textFunction'
 import { useState, useEffect } from 'react'
 import { useNavigate  } from 'react-router-dom'
 import { UseNewsItemBlock } from './newsItemBlock.props'
 import { setStore } from '~/store/setStore'
 import { emptyNewsItem } from '~/interfaces'
+import { commentsOfNum, dateStampToDate } from '~/service/textFunction'
 
 export const useNewsItemBlock: UseNewsItemBlock = (newStorie, index) => {
 	const [publishDateSafe, setPublishDateSafe] = useState('Недавно')

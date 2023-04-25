@@ -14,7 +14,8 @@ const useAnimations = () => {
 		return {
 			trigger: item,
 			start: 'top bottom',
-			end: "+=500",
+			end: "top 50px",
+			//scrub: true
 		}
 	}
 
@@ -30,17 +31,12 @@ const useAnimations = () => {
 		{ autoAlpha: 1, yPercent: 0, duration: 0.15 }
 	]
 
-	const clearPage = () => {
-		console.log('clearPage')
-
-		setStore.setForceReverce(true)
-	}
-
-  useEffect(() => {		
-    const ctx = gsap.context((self) => {	
+  useEffect(() => {
+		setStore.setForceUpdateList(false)
+		const ctx = gsap.context((self) => {				
 			if ((self !== undefined) && (self.selector !== undefined)) {		
 
-      	const newsItem = self.selector('.newsItem')
+      	const newsItem = self.selector('.gsapNewsItem')
 				newsItem.forEach((item: gsap.DOMTarget) => {
 					gsap
 						.set(item, newsItemStages[0]);
@@ -50,7 +46,7 @@ const useAnimations = () => {
 						.to(item,	newsItemStages[2])		
 				})
 
-      	const headerButtons = self.selector('header>button, header>.box')
+      	const headerButtons = self.selector('header>button, header>.gsapBox')
 				headerButtons.forEach((item: gsap.DOMTarget) => {
 					gsap
 						.set(item, headerStages[0]);
@@ -62,7 +58,7 @@ const useAnimations = () => {
 				
 			}			
     }, mainRef);
-  }, [])
+  }, [setStore.forceUpdateList])
 
 	useEffect(() => {
 		
@@ -71,7 +67,7 @@ const useAnimations = () => {
 
 				if ((self !== undefined) && (self.selector !== undefined)) {	
 	
-					const newsItem = self.selector('.newsItem')
+					const newsItem = self.selector('.gsapNewsItem')
 					newsItem.forEach((item: gsap.DOMTarget) => {
 						gsap
 							.timeline()
@@ -79,7 +75,7 @@ const useAnimations = () => {
 							.to(item,	newsItemStages[0])
 					})
 	
-					const headerButtons = self.selector('header>button, header>.box')
+					const headerButtons = self.selector('header>button, header>.gsapBox')
 					headerButtons.forEach((item: gsap.DOMTarget) => {
 						gsap
 							.timeline()
@@ -87,7 +83,7 @@ const useAnimations = () => {
 							.to(item,	headerStages[0])		
 					})
 					
-					const comments = self.selector('.comment_block, .comment.delay')
+					const comments = self.selector('.gsapCommentBlock, .gsapDelay')
 					comments.forEach((item: gsap.DOMTarget) => {
 						gsap
 							.timeline()
@@ -101,14 +97,9 @@ const useAnimations = () => {
 			setStore.setForceReverce(false)
 		}		
 	}, [setStore.forceReverce])
-	
-	useEffect(() => {
-		window.onpopstate = () => { setStore.setForceReverce(true) }
-	})
 
   return {
-		mainRef: mainRef, 
-		clearPage: clearPage,
+		mainRef: mainRef,
 	}
 	
 }

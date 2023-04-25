@@ -1,10 +1,12 @@
-import type { NewsItem } from "~/interfaces"
-import { useLoaderData } from "react-router-dom"
+import { Suspense } from "react"
+import { Await, defer, useLoaderData } from "react-router-dom"
 import { getNewsItems, getNewsList } from "~/api"
 import NewsList from "~/components/newsList"
 import NewsLayout from "~/components/newsLayout"
+import Loader from "~/components/loader"
+import type { NewsItem } from "~/interfaces"
 
-export const loaderIndex = async () => {
+async function dataLoader() {
   let newsItems: NewsItem[] = []
   
   try {
@@ -17,17 +19,40 @@ export const loaderIndex = async () => {
   return newsItems.filter(item => item !== undefined)
 }
 
+export const loaderIndex = async () => {
+  const dataLoaderPromise = dataLoader()
+
+  return defer({
+    newsItems: dataLoaderPromise,
+  })
+}
+
 export function Index() {
-  const newsItems = useLoaderData()
-  const newsItemsChild:string | JSX.Element = 
-    ((typeof newsItems !== 'string') && (typeof newsItems !== null)) ?
-      <NewsList newsItems={newsItems as NewsItem[]} />
-      :
-      newsItems as string
+  const data = useLoaderData() as {newsItems: string | NewsItem[]}
 
   return (
-    <NewsLayout autoUpdateChekbox = {true} backButton = {false}>
-      {newsItemsChild}
-    </NewsLayout>    
+    <Suspense
+      fallback={
+        <NewsLayout autoUpdateChekbox = {true} backButton = {false}>          
+          <Loader />
+        </NewsLayout>  
+      }
+    >
+      <NewsLayout autoUpdateChekbox = {true} backButton = {false}>
+          <Await
+            resolve={data.newsItems}
+            errorElement={
+              <p>Error loading package location!</p>
+            }
+          >
+            {(newsItems) => (
+              ((typeof newsItems !== 'string') && (typeof newsItems !== null)) ?
+                <NewsList newsItems={newsItems as NewsItem[]} />
+                :
+                newsItems as string
+            )}
+          </Await>
+      </NewsLayout>    
+    </Suspense>
   )
 }

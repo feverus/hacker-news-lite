@@ -1,6 +1,6 @@
 import useComment from './comment.service'
-import { dateStampToDate } from '~/service/textFunction'
 import C from './comment.module.scss'
+import { dateStampToDate } from '~/service/textFunction'
 
 export function Comment(props: {id: number, depth: number}) {
 	const [state, api] = useComment(props.id)
@@ -8,9 +8,9 @@ export function Comment(props: {id: number, depth: number}) {
 	if (!state.comment) return <></>
 
 	const commentStyle = (props.depth===0) ?
-		(C.comment + ' ' + C.delay)
+		(C.comment + ' ' + C.delay + ' gsapDelay ')
 		:
-		C.comment
+		C.comment + ' '
 
 	if (state.comment.dead || state.comment.deleted) return (
 		<div className = {commentStyle}>
@@ -48,7 +48,7 @@ export function Comment(props: {id: number, depth: number}) {
 			}
 			{state.showKids && state.comment.kids &&
 				state.comment.kids.map(id => 
-					<div key={id} className = {C.comment_block}>
+					<div key={id} className = {C.comment_block + ' gsapCommentBlock'}>
 						<Comment id={id} depth={props.depth + 1} />
 					</div>				
 				)

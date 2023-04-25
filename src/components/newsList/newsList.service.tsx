@@ -50,7 +50,10 @@ const useNewsList:UseNewsList = (newsItems) => {
 			intervalId && clearInterval(intervalId) 
 		}
 	}, [setStore.autoRefresh])
-	
+
+	useEffect(() => {
+		setStore.setForceUpdateList(true)
+	})
 
 	const state = {
 		newsItems: items,
